@@ -1,0 +1,16 @@
+# Python 通用忽略
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+.env
+
+# 临时文件
+*.log
+*.tmp
+
+# 构建输出
+public/

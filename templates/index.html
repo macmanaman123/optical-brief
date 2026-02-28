@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>光学相控阵每日进展 - {{ date }}</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .summary { white-space: pre-wrap; line-height: 1.8; }
+  </style>
+</head>
+<body class="bg-gray-50 text-gray-900 min-h-screen">
+  <div class="max-w-5xl mx-auto p-8">
+    <h1 class="text-4xl font-bold text-blue-800 mb-4">光学相控阵 + LOCSET + AI 结合 每日进展</h1>
+    <p class="text-lg text-gray-600 mb-8">
+      {{ date }} · 来源：arXiv + Optica 期刊群（Optics Express / Letters / Photonics Research 等）<br>
+      共抓取 {{ total }} 条相关进展（显示前 {{ items|length }} 条）
+    </p>
+
+    {% for item in items %}
+<div class="mb-12 bg-white shadow-md rounded-lg p-6 border-l-8 border-blue-500">
+  <div class="flex items-center mb-3">
+    <span class="inline-block bg-blue-600 text-white text-lg font-bold rounded-full w-10 h-10 flex items-center justify-center mr-4 shrink-0">
+      {{ loop.index }}
+    </span>
+    <h2 class="text-2xl font-semibold text-blue-700 flex-1">
+      <a href="{{ item.link }}" target="_blank" class="hover:underline">{{ item.title }}</a>
+    </h2>
+    <span class="text-sm text-gray-500 bg-gray-100 px-3 py-1 rounded ml-4">
+      {{ item.source }} · {{ item.date }}
+    </span>
+  </div>
+  <div class="summary text-gray-800 prose max-w-none">
+    {{ item.summary | safe }}
+  </div>
+</div>
+{% endfor %}
+
+    <footer class="text-center text-gray-500 mt-16 text-sm">
+      每日自动生成 · Powered by Groq + arXiv & Optica RSS · 如需更多来源可扩展
+    </footer>
+  </div>
+</body>
+</html>
