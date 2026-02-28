@@ -12,5 +12,7 @@ venv/
 *.log
 *.tmp
 
-# 构建输出
-public/
+# 构建输出（只忽略根目录下的其他东西，public/ 允许提交）
+build/
+dist/
+*.egg-info/
