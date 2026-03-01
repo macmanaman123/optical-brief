@@ -27,11 +27,12 @@ jobs:
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
         run: python main.py
 
-      - name: Commit and push new HTML
+            - name: Commit and push new HTML
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
         run: |
           git config --global user.name "macmanaman123"
-          git config --global user.email "lzc229@gmail.com"  # 改成你真实的邮箱
-          git remote set-url origin https://x-access-token:${GH_TOKEN}@github.com/macmanaman123/optical-brief.git
+          git config --global user.email "你的邮箱@qq.com"
           git add public/
           git commit -m "Daily update: $(date +'%Y-%m-%d')" || echo "No changes"
-          git push
+          git push https://x-access-token:${GH_TOKEN}@github.com/macmanaman123/optical-brief.git HEAD:main
