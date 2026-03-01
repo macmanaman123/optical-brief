@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="refresh" content="0;url=/public/optical_brief_$(date +%Y%m%d).html" />
+  <title>光学相控阵每日进展</title>
+  <script>
+    // 自动跳转到最新文件（日期基于本地时间）
+    const today = new Date().toISOString().slice(0,10).replace(/-/g,'');
+    window.location.href = `/public/optical_brief_${today}.html`;
+  </script>
+</head>
+<body>
+  <p>正在跳转到今日光学相控阵进展简报...</p>
+  <p>如果没有自动跳转，请点击 <a href="/public/optical_brief_$(date +%Y%m%d).html">这里</a></p>
+</body>
+</html>
