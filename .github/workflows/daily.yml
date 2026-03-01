@@ -32,7 +32,7 @@ jobs:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
         run: |
           git config --global user.name "macmanaman123"
-          git config --global user.email "你的邮箱@qq.com"  # 改成你的真实邮箱
+          git config --global user.email "lzc229@gmail.com"  # 改成你的真实邮箱
           ls -la public/ || echo "public 文件夹为空或不存在"
           git status
           git add public/ || echo "git add failed"
