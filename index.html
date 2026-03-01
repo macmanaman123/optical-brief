@@ -2,16 +2,32 @@
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
-  <meta http-equiv="refresh" content="0;url=/public/optical_brief_$(date +%Y%m%d).html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>光学相控阵每日进展</title>
   <script>
-    // 自动跳转到最新文件（日期基于本地时间）
-    const today = new Date().toISOString().slice(0,10).replace(/-/g,'');
-    window.location.href = `/public/optical_brief_${today}.html`;
+    // 自动跳转到最新文件（按仓库文件名倒序取第一个）
+    fetch('/public/')
+      .then(res => res.text())
+      .then(html => {
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(html, 'text/html');
+        const links = Array.from(doc.querySelectorAll('a'));
+        const htmlFiles = links
+          .map(a => a.href)
+          .filter(href => href.endsWith('.html'))
+          .sort((a, b) => b.localeCompare(a)); // 倒序取最新
+        if (htmlFiles.length > 0) {
+          window.location.href = htmlFiles[0];
+        } else {
+          document.body.innerHTML = '<h1>暂无简报</h1>';
+        }
+      })
+      .catch(() => document.body.innerHTML = '<h1>加载失败</h1>');
   </script>
 </head>
-<body>
-  <p>正在跳转到今日光学相控阵进展简报...</p>
-  <p>如果没有自动跳转，请点击 <a href="/public/optical_brief_$(date +%Y%m%d).html">这里</a></p>
+<body style="font-family: sans-serif; text-align: center; padding: 100px 20px;">
+  <h1>光学相控阵每日进展</h1>
+  <p style="font-size: 18px;">正在自动加载最新简报...</p>
+  <p>如果没有自动跳转，请手动访问 <a href="/public/">文件列表</a></p>
 </body>
 </html>
